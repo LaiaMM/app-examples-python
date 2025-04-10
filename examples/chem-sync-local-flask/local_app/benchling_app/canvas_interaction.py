@@ -54,16 +54,28 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
 
             #Pull the entity ID
             canvas = app.benchling.apps.get_canvas_by_id(canvas_id)
-            ent_id = canvas_inputs["input_block_1"]
+            # ent_id = canvas_inputs["input_block_1"]
+            ent_id_list = canvas_inputs["input_block_2"]
+            notebook_name  = canvas_inputs["input_block_3"]
 
-            destination_path = Path("downloaded_files/downloaded_csv.csv")
+            # destination_path = Path("downloaded_files/downloaded_csv.csv")
+            destination_path_dict = {
+                "clc_lmm_dummy_1": { 
+                    "path": "downloaded_files/clc_lmm_dummy_1.csv",
+                },
+                "clc_lmm_dummy_2": {
+                    "path": "downloaded_files/clc_lmm_dummy_1.csv",
+                }
+            }
 
-            download_csv(app=app, entit_id=ent_id, destination_path = destination_path)
+            for ent_id in ent_id_list:
+
+                download_csv(app=app, entit_id=ent_id , destination_dict= destination_path_dict) #, destination_path = destination_path)
 
 
-            #This is the function to modify the CSV
-            process_csv(destination_path)
-            folder_id = "lib_Fm3kgyWM"
+            # #This is the function to modify the CSV
+            # process_csv(destination_path)
+            # folder_id = "lib_Fm3kgyWM"
 
 
             # Commented until I get the permissions to create entities
