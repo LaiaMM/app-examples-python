@@ -63,19 +63,33 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
 
             #This is the function to modify the CSV
             process_csv(destination_path)
-            folder_id = "lib_dn9tmFzU"
+            folder_id = "lib_Fm3kgyWM"
 
 
-            created_entity = upload_csv(app = app, 
-            path = destination_path, 
-            new_filename = "ModifiedCSV.csv", 
-            new_entity_name = "Modified CSV",
-            folder_id = folder_id)
+            # Commented until I get the permissions to create entities
+            # created_entity = upload_csv(app = app, 
+            # path = destination_path, 
+            # new_filename = "ModifiedCSV.csv", 
+            # new_entity_name = "Modified CSV",
+            # folder_id = folder_id)
 
-            destination_path.unlink()
+            # destination_path.unlink()
 
-            # Render results
-            render_results_canvas(f"Successfully created entity: [{created_entity.name}]({created_entity.web_url})", canvas_id, canvas_builder, session)
+            # # Render results
+            # render_results_canvas(f"Successfully created entity: [{created_entity.name}]({created_entity.web_url})", canvas_id, canvas_builder, session)
+           
+            results_blocks = [
+                MarkdownUiBlock(
+                    id="results_display",
+                    type=MarkdownUiBlockType.MARKDOWN,
+                    value="Successfully NOT created entity",
+                )
+            ]
+
+            canvas_update = canvas_builder.with_blocks(results_blocks).to_update()
+            session.app.benchling.apps.update_canvas(canvas_id, canvas_update)
+
+
 
     else:
         # Re-enable the Canvas, or it will stay disabled and the user will be stuck

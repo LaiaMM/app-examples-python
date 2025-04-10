@@ -1,12 +1,12 @@
 manifestVersion: 1
 
 info:
-  name: Simple Text Transformer
+  name: CLC Create and register entities
   version: 0.1.0
   
 features:
-  - name: Text Transformer
-    id: text_transformer
+  - name: CLC Create and register entities
+    id: CLC_create_and_register_entities
     type: CANVAS
     
 subscriptions:

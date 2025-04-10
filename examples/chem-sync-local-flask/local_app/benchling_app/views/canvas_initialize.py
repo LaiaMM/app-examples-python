@@ -12,6 +12,8 @@ from benchling_sdk.models import (
     SearchInputUiBlockItemType,
     TextInputUiBlock,
     TextInputUiBlockType,
+    SearchInputMultiValueUiBlock,
+    SearchInputMultiValueUiBlockType,
 )
 from local_app.benchling_app.views.constants import (
 PROCESS_BUTTON_ID,
@@ -49,14 +51,41 @@ def input_blocks() -> list[UiBlock]:
         MarkdownUiBlock(
             id="instructions",
             type=MarkdownUiBlockType.MARKDOWN,
-            value="# Text Processing App\nEnter CSV Entity in search box below",
+            value="# Text Processing App\nEnter several CSV Entity in search box below",
         ),
-        SearchInputUiBlock(
-            id="input_block_1",
-            type=SearchInputUiBlockType.SEARCH_INPUT, 
+        # SearchInputUiBlock(
+        #     id="input_block_1",
+        #     type=SearchInputUiBlockType.SEARCH_INPUT, 
+        #     item_type=SearchInputUiBlockItemType.CUSTOM_ENTITY,
+        #     value=None,
+        #     schema_id=None,
+        #     enabled=True
+        # ),
+        # MarkdownUiBlock(
+        #     id="comment",
+        #     type=MarkdownUiBlockType.MARKDOWN,
+        #     value="Enter several CSV Entity in search box below",
+        # ),
+        SearchInputMultiValueUiBlock(
+            id="input_block_2",
+            type=SearchInputMultiValueUiBlockType.SEARCH_INPUT_MULTIVALUE, 
             item_type=SearchInputUiBlockItemType.CUSTOM_ENTITY,
-            value=None,
+            value=[], 
             schema_id=None,
+            enabled=True
+        ),
+        MarkdownUiBlock(
+            id="comment2",
+            type=MarkdownUiBlockType.MARKDOWN,
+            value="Enter the EXACT notebook name in the box below",
+        ),
+        TextInputUiBlock(
+            id="input_block_3",
+            type=TextInputUiBlockType.TEXT_INPUT, 
+            #item_type=SearchInputUiBlockItemType.CUSTOM_ENTITY,
+            placeholder="Notebook_API_ID",
+            value=None,
+            #schema_id=None,
             enabled=True
         ),
         ButtonUiBlock(

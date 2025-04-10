@@ -8,6 +8,8 @@ from benchling_sdk.services.v2.stable.blob_service import BlobService
 from benchling_sdk.models import CustomEntityCreate, BlobCreate
 from benchling_sdk.helpers.serialization_helpers import fields
 import csv
+import pandas as pd
+
 
 def download_csv(app: App, entit_id: str, destination_path: Path) -> None:
     """
@@ -26,10 +28,33 @@ def download_csv(app: App, entit_id: str, destination_path: Path) -> None:
     blob_id = benchling_csv_ent._fields['CSV'].value
 
     destination_path.parent.mkdir(parents=True, exist_ok=True)
+    print(destination_path)
 
     #Download the csv
     blob_csv = existing_blob_serv.download_file(blob_id, destination_path)
     print("File dowloaded to " + str(destination_path))
+
+    # with open(destination_path, "r", encoding="utf-8") as f:
+    #     content = f.read()
+
+    # print("Raw file content:")
+    # print(content[:500])
+
+    # #LMM code
+    
+    # my_df = []
+
+    # with open(destination_path, 'r', newline='') as file:
+    #     reader = csv.reader(file)
+    #     for row in reader:
+    #         my_df.append(row)
+
+    # # Print all rows
+    # for row in my_df:
+    #     print(row)
+    my_df = pd.read_csv(destination_path)
+    print(my_df)
+    
 
 def upload_csv(app: App, path:Path, new_filename: str, new_entity_name:str, folder_id: str, schema_id = "ts_WDtkRWgc") -> CustomEntity:
     #Make a new blob and customentity service

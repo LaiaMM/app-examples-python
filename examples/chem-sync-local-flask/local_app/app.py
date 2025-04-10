@@ -101,5 +101,5 @@ def _enqueue_work(webhook_data) -> None:
 if __name__ == "__main__":
     app = create_app()
     # Adding more debug output when starting the app
-    logger.info("Starting Flask application on 0.0.0.0:8000")
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    logger.info("Starting Flask application on 0.0.0.0:8080")
+    app.run(host='0.0.0.0', port=8080, debug=True)
