@@ -25,6 +25,8 @@ from benchling_sdk.models import CustomEntityCreate, BlobCreate
 from benchling_sdk.helpers.serialization_helpers import fields
 
 from local_app.benchling_app.csv_utils import download_csv, upload_csv, process_csv
+from local_app.benchling_app.notebook_utils import process_notebook
+from local_app.benchling_app.create_register_entites import create_and_register_entities
 from local_app.benchling_app.views.constants import (
 PROCESS_BUTTON_ID,
 TEXT_INPUT_ID
@@ -53,7 +55,7 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
             canvas_inputs = canvas_builder.inputs_to_dict_single_value()
 
             #Pull the entity ID
-            canvas = app.benchling.apps.get_canvas_by_id(canvas_id)
+            # canvas = app.benchling.apps.get_canvas_by_id(canvas_id) # what is this for?
             # ent_id = canvas_inputs["input_block_1"]
             ent_id_list = canvas_inputs["input_block_2"]
             notebook_name  = canvas_inputs["input_block_3"]
@@ -62,15 +64,25 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
             destination_path_dict = {
                 "clc_lmm_dummy_1": { 
                     "path": "downloaded_files/clc_lmm_dummy_1.csv",
+                    
                 },
                 "clc_lmm_dummy_2": {
                     "path": "downloaded_files/clc_lmm_dummy_1.csv",
+                   
                 }
-            }
+            } 
+            #src_file,plateA_path,plateB_path, crrna_file, rec_file
 
             for ent_id in ent_id_list:
 
                 download_csv(app=app, entit_id=ent_id , destination_dict= destination_path_dict) #, destination_path = destination_path)
+
+            
+            
+
+            create_and_register_entities(app=app, destination_dict= destination_path_dict)
+
+            process_notebook(app=app, notebook_name=notebook_name)
 
 
             # #This is the function to modify the CSV
