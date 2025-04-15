@@ -9,7 +9,7 @@ from benchling_sdk.models import CustomEntityCreate, BlobCreate
 from benchling_sdk.helpers.serialization_helpers import fields
 import csv
 import pandas as pd
-
+import os
 
 
 
@@ -65,8 +65,8 @@ def download_csv(app: App, entit_id: str, destination_dict)-> None: # , destinat
     # # Print all rows
     # for row in my_df:
     #     print(row)
-    my_df = pd.read_csv(destination_path)
-    print(my_df)
+    # my_df = pd.read_csv(destination_path)
+    # print(my_df)
     
 
 def upload_csv(app: App, path:Path, new_filename: str, new_entity_name:str, folder_id: str, schema_id = "ts_WDtkRWgc") -> CustomEntity:

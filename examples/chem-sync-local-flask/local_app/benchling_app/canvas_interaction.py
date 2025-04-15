@@ -63,15 +63,16 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
             # destination_path = Path("downloaded_files/downloaded_csv.csv")
             destination_path_dict = {
                 "clc_lmm_dummy_1": { 
-                    "path": "downloaded_files/clc_lmm_dummy_1.csv",
+                    "path": "downloaded_files/crrna_dummy.csv",
                     
                 },
                 "clc_lmm_dummy_2": {
-                    "path": "downloaded_files/clc_lmm_dummy_1.csv",
+                    "path": "downloaded_files/crrna_plate_specs_dummy.csv",
                    
                 }
             } 
             #src_file,plateA_path,plateB_path, crrna_file, rec_file
+
 
             for ent_id in ent_id_list:
 
@@ -80,9 +81,9 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
             
             
 
-            create_and_register_entities(app=app, destination_dict= destination_path_dict)
+            create_and_register_entities(app=app )#, destination_dict= destination_path_dict)
 
-            process_notebook(app=app, notebook_name=notebook_name)
+            #process_notebook(app=app, notebook_name=notebook_name)
 
 
             # #This is the function to modify the CSV
@@ -106,7 +107,7 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
                 MarkdownUiBlock(
                     id="results_display",
                     type=MarkdownUiBlockType.MARKDOWN,
-                    value="Successfully NOT created entity",
+                    value="Success????",
                 )
             ]
 
