@@ -52,11 +52,12 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
             
             session.attach_canvas(canvas_id)
             canvas_builder = _canvas_builder_from_canvas_id(app, canvas_id)
-            canvas_inputs = canvas_builder.inputs_to_dict_single_value()
+            canvas_inputs = canvas_builder.inputs_to_dict()#.inputs_to_dict_single_value()
 
             #Pull the entity ID
             # canvas = app.benchling.apps.get_canvas_by_id(canvas_id) # what is this for?
             # ent_id = canvas_inputs["input_block_1"]
+
             ent_id_list = canvas_inputs["input_block_2"]
             notebook_name  = canvas_inputs["input_block_3"]
 
@@ -83,7 +84,7 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
 
             create_and_register_entities(app=app )#, destination_dict= destination_path_dict)
 
-            #process_notebook(app=app, notebook_name=notebook_name)
+            process_notebook(app=app, notebook_name=notebook_name)
 
 
             # #This is the function to modify the CSV

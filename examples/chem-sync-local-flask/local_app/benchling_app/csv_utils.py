@@ -40,11 +40,13 @@ def download_csv(app: App, entit_id: str, destination_dict)-> None: # , destinat
         print(f"No config found for: {blob_file_name}")
 
     # destination_path = Path("downloaded_files/downloaded_csv.csv")
+    destination_path = Path(destination_path)
 
     destination_path.parent.mkdir(parents=True, exist_ok=True)
 
     #Download the csv
-    blob_csv = existing_blob_serv.download_file(blob_id, destination_path)
+    # THIS LINE WORKS JUST I DON'T WANT TO KEEP DOWNLOADING AND ERASING THE FILES. UNCOMMENT FOR DEPLOYMENT
+    # blob_csv = existing_blob_serv.download_file(blob_id, destination_path)
     print("File dowloaded to " + str(destination_path))
 
     # with open(destination_path, "r", encoding="utf-8") as f:

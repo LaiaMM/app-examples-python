@@ -15,10 +15,15 @@ def process_notebook(app: App, notebook_name: str)-> None: # , destination_path:
     
     entry_cust_serv = EntryService(client=app.benchling._client)
     #Get the entity proper through the custom entity service
-    notebook_ent = entry_cust_serv.list_entries(name = notebook_name)
+    notebook_entries = entry_cust_serv.list_entries(name = notebook_name)
     
     #get the noebook ID
+    for entry in notebook_entries:
+        for e in entry.days:
+            print(e)
+            print("______")
+            # not working
     
-    notebook_id = notebook_ent.id
+    #notebook_id = notebook_ent.id
 
     # Do stuff with notebook
